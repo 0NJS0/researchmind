@@ -1,0 +1,48 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  backend:
+    build:
+      context: .
+      target: backend
+    restart: unless-stopped
+    ports:
+      - "8001:8000"
+    environment:
+      - LLM_URL=${LLM_URL}
+      - LLM_MODEL=${LLM_MODEL}
+      - LLM_API_KEY=${LLM_API_KEY:-none}
+      - QDRANT_URL=http://qdrant:6333
+      - COLLECTION_NAME=${COLLECTION_NAME:-papers}
+      - PAPERS_DIR=/data/papers
+      - HF_HOME=/hf-cache
+    volumes:
+      - papers_data:/data/papers
+      - hf_cache:/hf-cache
+    depends_on:
+      qdrant:
+        condition: service_started
+
+  frontend:
+    build:
+      context: .
+      target: frontend
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      - API_BASE_URL=http://backend:8000
+    depends_on:
+      - backend
+
+volumes:
+  qdrant_data:
+  papers_data:
+  hf_cache:

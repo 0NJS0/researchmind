@@ -8,7 +8,7 @@ Multi-paper research analysis platform. Upload PDFs, index them into a vector da
 ┌─────────────┐     ┌──────────────┐     ┌───────────┐     ┌─────────┐
 │  Streamlit  │────▶│  FastAPI     │────▶│  Qdrant   │     │  LLM    │
 │  (src/ui)   │     │  (src/api)   │     │  (vector  │     │ (self-  │
-│   :8501     │◀────│   :8000      │◀────│   DB)     │     │ hosted) │
+│   :8501     │◀────│   :8000      │◀────│   DB)      ◀────│ hosted) │
 └─────────────┘     └──────┬───────┘     └───────────┘     └─────────┘
                            │
                     ┌──────┴───────┐
@@ -124,12 +124,12 @@ cp .env.example .env   # then edit .env
 ### `.env` Configuration
 
 ```
-LLM_URL=http://localhost:3000/v1        # Your LLM endpoint
-LLM_MODEL=your-model-name               # Model name (e.g., llama3.2, gemma2, etc.)
-LLM_API_KEY=none                        # API key (use "none" if not required)
-QDRANT_URL=http://localhost:6333        # Qdrant endpoint
-COLLECTION_NAME=papers                  # Qdrant collection name
-PAPERS_DIR=/path/to/papers/             # Directory for PDFs and reports
+LLM_URL=(Your Self Hosted LLM)                                              # Your LLM endpoint
+LLM_MODEL=(Your Self Hosted Model)                                          # Model name
+LLM_API_KEY=(Your API KEY)                                                  # API key (use "none" if not required)
+QDRANT_URL=(SELF HOSTED QDRANT URL)                                         # Qdrant endpoint
+COLLECTION_NAME=(COLLECTION_NAME for the qdrant metadata)                   # Qdrant collection name
+PAPERS_DIR=/path/to/papers/                                                 # Directory for PDFs and reports
 ```
 
 ## Running

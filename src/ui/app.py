@@ -1,7 +1,8 @@
+import os
 import streamlit as st
 import requests
 
-API_URL = "http://localhost:8000"
+API_URL = os.getenv("API_BASE_URL", "http://localhost:8000")
 
 
 def api_healthy():
