@@ -49,9 +49,7 @@ def create_store():
         )
     except (ConnectTimeout, ResponseHandlingException, ConnectionError) as e:
         raise ConnectionError(
-            f"Cannot connect to Qdrant at {QDRANT_URL}. "
-            f"Make sure Qdrant is running (docker run -d -p 6333:6333 qdrant/qdrant). "
-            f"Error: {e}"
+            f"Cannot connect to Qdrant at {QDRANT_URL}. Make sure Qdrant is running "
         )
 
     return QdrantVectorStore(

@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import TypedDict, NotRequired
 
 
 class ResearchState(TypedDict):
@@ -11,4 +11,4 @@ class ResearchState(TypedDict):
     history: str
     topic: str
     k: int
-
+    domain_classification: NotRequired[str]

@@ -270,22 +270,49 @@ if selected:
             )
             if selected_label:
                 rp = report_options[selected_label]
-                if st.button("Load Report", use_container_width=True):
-                    try:
-                        resp = requests.get(
-                            f"{API_URL}/reports/content",
-                            params={"file": rp["file"]},
-                            timeout=10,
-                        )
-                        resp.raise_for_status()
-                        data = resp.json()
-                        if data.get("status") == "ok":
-                            st.session_state.saved_report = data["content"]
-                            st.rerun()
-                        else:
-                            st.error(data.get("error", "Failed to load report"))
-                    except Exception as e:
-                        st.error(f"Failed to load report: {e}")
+                col1, col2 = st.columns(2)
+                with col1:
+                    if st.button("Load Report", use_container_width=True):
+                        try:
+                            resp = requests.get(
+                                f"{API_URL}/reports/content",
+                                params={"file": rp["file"]},
+                                timeout=10,
+                            )
+                            resp.raise_for_status()
+                            data = resp.json()
+                            if data.get("status") == "ok":
+                                st.session_state.saved_report = data["content"]
+                                st.session_state.saved_report_filename = rp.get("filename", "report.md")
+                                st.session_state.dl_content = None
+                                st.rerun()
+                            else:
+                                st.error(data.get("error", "Failed to load report"))
+                        except Exception as e:
+                            st.error(f"Failed to load report: {e}")
+                with col2:
+                    if st.button("Download .md", use_container_width=True):
+                        try:
+                            resp = requests.get(
+                                f"{API_URL}/reports/content",
+                                params={"file": rp["file"]},
+                                timeout=10,
+                            )
+                            resp.raise_for_status()
+                            data = resp.json()
+                            if data.get("status") == "ok":
+                                st.session_state.dl_content = data["content"]
+                                st.session_state.dl_filename = rp.get("filename", "report.md")
+                        except Exception as e:
+                            st.error(f"Failed to download: {e}")
+
+                if st.session_state.get("dl_content"):
+                    st.download_button(
+                        "💾 Save file",
+                        data=st.session_state.dl_content,
+                        file_name=st.session_state.dl_filename,
+                        mime="text/markdown",
+                    )
         else:
             st.info("No reports saved yet. Use the Report button above.")
     except Exception as e:
@@ -294,9 +321,19 @@ if selected:
 if st.session_state.get("saved_report"):
     st.divider()
     st.markdown(st.session_state.saved_report)
-    if st.button("Close saved report"):
-        st.session_state.saved_report = None
-        st.rerun()
+    col1, col2 = st.columns(2)
+    with col1:
+        st.download_button(
+            "Download .md",
+            data=st.session_state.saved_report,
+            file_name=st.session_state.get("saved_report_filename", "report.md"),
+            mime="text/markdown",
+            use_container_width=True,
+        )
+    with col2:
+        if st.button("Close saved report", use_container_width=True):
+            st.session_state.saved_report = None
+            st.rerun()
 
 # Display individual paper report when selected
 if st.session_state.get("paper_report"):
@@ -304,6 +341,16 @@ if st.session_state.get("paper_report"):
     st.divider()
     st.subheader(f"Analysis: {rpt['paper_id']}")
     st.markdown(rpt["content"])
-    if st.button("Close report"):
-        st.session_state.paper_report = None
-        st.rerun()
+    col1, col2 = st.columns(2)
+    with col1:
+        st.download_button(
+            "Download .md",
+            data=rpt["content"],
+            file_name=f"{rpt['paper_id']}_analysis.md",
+            mime="text/markdown",
+            use_container_width=True,
+        )
+    with col2:
+        if st.button("Close report", use_container_width=True):
+            st.session_state.paper_report = None
+            st.rerun()

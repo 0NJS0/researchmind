@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from pathlib import Path
 import asyncio
 from src.graph.workflow import research_graph
+from src.graph.report_graph import report_graph
 from src.ingest.loader import load_papers
 from langchain_community.document_loaders import PyMuPDFLoader
 from src.ingest.chunker import chunk_documents
@@ -118,87 +119,6 @@ async def query(request: QueryRequest):
         return {"report": "Pipeline failed. Check server logs for details."}
 
 
-def _generate_report_sync(topic: str) -> str:
-    from src.llm.llm import llm as llm_model
-    from src.ingest.vectorstore import get_retriever
-    from collections import defaultdict
-
-    retriever = get_retriever(k=100, topic=topic)
-    docs = retriever.invoke(
-        "Generate a comprehensive research report covering all papers: "
-        "comparative analysis of methodologies, key findings, research gaps, and future directions"
-    )
-    if not docs:
-        return "No documents found."
-
-    # Group chunks by paper_id
-    papers: dict[str, list] = defaultdict(list)
-    for d in docs:
-        pid = d.metadata.get("paper_id", "unknown")
-        papers[pid].append(d)
-
-    logger.info("Report: analyzing %d papers (%d chunks)", len(papers), len(docs))
-
-    # Map step: analyze each paper individually
-    paper_analyses = {}
-    for pid, chunks in papers.items():
-        context = "\n".join(c.page_content for c in chunks)
-        prompt = f"""
-Analyze this research paper and extract:
-1. Dataset used
-2. Model architecture
-3. Training method
-4. Evaluation metrics
-5. Main results and findings
-
-Paper ({pid}):
-{context}
-
-Provide a concise summary.
-"""
-        try:
-            resp = llm_model.invoke(prompt)
-            paper_analyses[pid] = resp.content
-        except Exception as e:
-            paper_analyses[pid] = f"Analysis failed for {pid}: {e}"
-
-        # Save individual paper analysis
-        paper_reports_dir = Path(PAPERS_DIR) / topic / pid / "_reports"
-        paper_reports_dir.mkdir(parents=True, exist_ok=True)
-        analysis_file = paper_reports_dir / f"{pid}_analysis.md"
-        with open(analysis_file, "w") as f:
-            f.write(paper_analyses[pid])
-        logger.info("Saved analysis for '%s' to %s", pid, analysis_file)
-
-    combined = "\n\n".join(f"## {pid}\n{analysis}" for pid, analysis in paper_analyses.items())
-
-    # Reduce step: compare and generate final report
-    reduce_prompt = f"""
-You are a senior research advisor. Based on the following individual paper analyses, create a comprehensive report.
-
-{combined}
-
-Format the report:
-# Summary
-
-# Methodology Comparison
-| Paper | Dataset | Model Architecture | Training Method | Evaluation Metrics |
-
-# Key Findings
-
-# Comparative Analysis
-
-# Research Gaps
-
-# Future Work
-"""
-    try:
-        result = llm_model.invoke(reduce_prompt)
-        return result.content
-    except Exception as e:
-        return f"Report generation failed: {e}"
-
-
 @app.post("/report")
 async def report(topic: str = ""):
     if not topic:
@@ -206,7 +126,21 @@ async def report(topic: str = ""):
 
     async def run_report():
         try:
-            report_text = await asyncio.to_thread(_generate_report_sync, topic)
+            result = await asyncio.to_thread(
+                report_graph.invoke,
+                {
+                    "question": f"Generate a comprehensive research report for topic: {topic}",
+                    "documents": [],
+                    "analysis": "",
+                    "comparison": "",
+                    "gaps": "",
+                    "report": "",
+                    "history": "",
+                    "topic": topic,
+                    "k": 100,
+                },
+            )
+            report_text = result.get("report", "No report generated.")
             reports_dir = Path(PAPERS_DIR) / topic / "_reports"
             reports_dir.mkdir(parents=True, exist_ok=True)
             filename = f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
