@@ -38,6 +38,59 @@ It runs as a single container: a FastAPI backend that also serves the React UI. 
 
 ![Topic validator](docs/screenshot/topic_validator.png)
 
+## Prerequisites
+
+**To run it (Docker):**
+
+- Docker with the Compose plugin (`docker compose version`)
+- PostgreSQL with the [pgvector](https://github.com/pgvector/pgvector) extension
+- A [SearXNG](https://docs.searxng.org/) instance with the JSON output format enabled
+- A free [OpenRouter](https://openrouter.ai/) account and API key (only `:free` models are used by default)
+- Optional: a free [OpenAlex API key](https://openalex.org/settings/api) for citations, peer-review status and open-access PDFs (raises the daily limit from 1,000 to 10,000 credits)
+
+No GPU is needed: the LLMs run on OpenRouter, and the container itself is light.
+
+**For local development, also:**
+
+- Python 3.12 and [uv](https://docs.astral.sh/uv/)
+- Node.js 22 and [pnpm](https://pnpm.io/) (`corepack enable`)
+
+### Don't have PostgreSQL or SearXNG yet?
+
+Both run in Docker. A minimal setup:
+
+```bash
+# PostgreSQL 17 with pgvector
+docker run -d --name researchmind-db --restart unless-stopped \
+  -e POSTGRES_USER=researchmind -e POSTGRES_PASSWORD=<choose-a-password> -e POSTGRES_DB=researchmind \
+  -p <db-port>:5432 -v researchmind-pg:/var/lib/postgresql/data pgvector/pgvector:pg17
+
+# SearXNG
+mkdir -p ./searxng
+docker run -d --name searxng --restart unless-stopped \
+  -p <searxng-port>:8080 -v "$(pwd)/searxng:/etc/searxng" searxng/searxng
+```
+
+In `-p <host-port>:<container-port>`, choose any free port on your machine for the left side. The right side is the port inside the container and must stay as shown.
+
+SearXNG writes `./searxng/settings.yml` on first start. Edit it so the API can return JSON, then restart the container (`docker restart searxng`):
+
+```yaml
+search:
+  formats:
+    - html
+    - json
+```
+
+Then, in `.env`:
+
+```bash
+DATABASE_URL=postgresql://researchmind:<choose-a-password>@<host-ip>:<db-port>/researchmind
+SEARXNG_URL=http://<host-ip>:<searxng-port>
+```
+
+Inside the ResearchMind container, `localhost` is the container itself, so use the host machine's IP address (or put all three containers on one Docker network and use the container names).
+
 ## Configuration
 
 Copy `.env.example` to `.env` and fill it in. **Nothing secret is hardcoded, and `.env` is git-ignored.**
@@ -47,7 +100,7 @@ Copy `.env.example` to `.env` and fill it in. **Nothing secret is hardcoded, and
 | `LLM_API_KEY` | OpenRouter API key |
 | `LLM_MODEL`, `LLM_FALLBACK_MODELS` | Main chat model and models to fall back on when it is rate limited (free models end in `:free`) |
 | `EMBEDDING_MODEL` | OpenRouter embedding model (default `nvidia/nemotron-3-embed-1b:free`) |
-| `DATABASE_URL` | `postgresql://user:pass@host:5432/db`. The app creates the `vector` extension and its tables on startup. |
+| `DATABASE_URL` | `postgresql://<user>:<password>@<host>:<port>/<db>`. The app creates the `vector` extension and its tables on startup. |
 | `SEARXNG_URL` | Your SearXNG instance. It must have `json` enabled under `search.formats`. |
 
 Optional tuning variables are documented inline in `.env.example`.
@@ -73,7 +126,7 @@ Free models are rate limited (about 20 requests per minute, plus a daily cap). T
 cp .env.example .env    # then edit
 mkdir -p ./data/papers && sudo chown -R 1000:1000 ./data   # papers folder (or set PAPERS_HOST_DIR in .env)
 docker compose up -d --build
-# UI + API on http://<homelab-ip>:47813  (port set in docker-compose.yml / RESEARCHMIND_PORT)
+# UI + API on http://<host-ip>:<port>  (set RESEARCHMIND_PORT in .env; default in docker-compose.yml)
 ```
 
 ### Local development

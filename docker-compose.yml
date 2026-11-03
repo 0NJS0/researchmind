@@ -4,7 +4,7 @@
 #   PostgreSQL + pgvector (DATABASE_URL), SearXNG (SEARXNG_URL), OpenRouter (LLM_API_KEY), OpenAlex (OPENALEX_API_KEY)
 #
 # Deploy:   docker compose up -d --build
-# Open:     http://<homelab-ip>:47813
+# Open:     http://<host-ip>:<RESEARCHMIND_PORT>
 # Logs:     docker compose logs -f researchmind
 services:
   researchmind:
@@ -13,7 +13,7 @@ services:
     container_name: researchmind
     restart: unless-stopped
     ports:
-      - "${RESEARCHMIND_PORT:-47813}:8000"     # 47813 was free on the homelab; override in .env if needed
+      - "${RESEARCHMIND_PORT:-47813}:8000"     # set RESEARCHMIND_PORT in .env to choose the host port
     env_file: .env
     environment:
       - PAPERS_DIR=/data/papers
