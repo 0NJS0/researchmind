@@ -31,11 +31,15 @@ React UI (frontend/) ──► FastAPI (src/api) ──► PostgreSQL + pgvector
 
 ![Autopilot](docs/screenshot/autopilot.png)
 
+**Research gaps**: gaps harvested from the papers, each with its evidence. Confidence comes from independent supporting papers, not from the model, and each gap is checked against the wider literature to see whether it is still open or already addressed elsewhere.
+
+![Research gaps](docs/screenshot/gaps.png)
+
 **Papers**: every paper in a topic with its peer-review status, citations, linked gaps and full-text links, plus the papers the screening rejected.
 
 ![Papers](docs/screenshot/library.png)
 
-**Topic validator**: stress-tests a research idea (is it specific, has it been done, how crowded is the field) before you commit to it.
+**Topic validator**: stress-tests a research idea (is it specific, has it been done, how crowded is the field) before you commit to it. When an idea is too broad, it asks the questions that would narrow it down instead of choosing a topic for you.
 
 ![Topic validator](docs/screenshot/topic_validator.png)
 
