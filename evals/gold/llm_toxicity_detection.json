@@ -1,0 +1,129 @@
+{
+  "topic": "LLM_Toxicity_Detection",
+  "note": "Hand-checked facts from the six uploaded papers. Every fact has the page and the exact source sentence so it can be re-verified. Edit freely; 'match' lists acceptable spellings (any one counts).",
+  "papers": {
+    "Efficient_Detection_of_Toxic_Prompts_in_Large_Language_Models": {
+      "facts": [
+        {"id": "td_acc_rtp", "match": ["96.39"], "claim": "96.39% accuracy (RealToxicityPrompts)", "page": 1,
+         "quote": "ToxicDetector achieves a high accuracy of 96.39% and a low false positive rate of 2.00%"},
+        {"id": "td_acc_spc", "match": ["97.58"], "claim": "97.58% accuracy on SafetyPromptCollections", "page": 2,
+         "quote": "overall accuracy of 97.58% on SafetyPromptCollections and 96.39% on the orthogonal RealToxicityPrompts"},
+        {"id": "td_fpr", "match": ["2.00", "2.0%", "2%", "1.90", "1.9%"], "claim": "false positive rate 2.00% / 1.90%", "page": 2,
+         "quote": "lowest false positive rates, at 1.90% on SafetyPromptCollections and 2.00% on RealToxicityPrompts"},
+        {"id": "td_speed", "match": ["0.0780", "0.078"], "claim": "0.0780 s per prompt", "page": 1,
+         "quote": "ToxicDetector's processing time of 0.0780 seconds per prompt"},
+        {"id": "td_data", "match": ["SafetyPromptCollections", "Safety Prompt Collections"], "claim": "evaluated on SafetyPromptCollections", "page": 6,
+         "quote": "We use two orthogonal datasets, SafetyPromptCollections and RealToxicityPrompts"}
+      ]
+    },
+    "Efficient_Toxic_Content_Detection_by_Bootstrapping_and_Distilling_Large_Language_Models": {
+      "facts": [
+        {"id": "bd_dtot", "match": ["Decision-Tree-of-Thought", "Decision Tree of Thought", "DToT"], "claim": "DToT prompting method", "page": 1,
+         "quote": "we design a novel prompting method named Decision-Tree-of-Thought (DToT)"},
+        {"id": "bd_46", "match": ["4.6"], "claim": "DToT improves LLM accuracy by up to 4.6%", "page": 1,
+         "quote": "DToT can improve the accuracy of LLMs by up to 4.6%"},
+        {"id": "bd_169", "match": ["16.9"], "claim": "student LMs up to 16.9% accuracy improvement", "page": 1,
+         "quote": "student LMs fine-tuned with rationales extracted via DToT outperform baselines on all datasets with up to 16.9% accuracy improvement"},
+        {"id": "bd_60x", "match": ["60×", "60x", "60 times", "60-fold", "60 ×"], "claim": "students more than 60x smaller", "page": 1,
+         "quote": "while being more than 60× smaller than conventional LLMs"}
+      ]
+    },
+    "Holistic_Evaluation_of_Large_Language_Models_Robustness_Accuracy_and_Toxicity": {
+      "facts": [
+        {"id": "he_langtest", "match": ["LangTest"], "claim": "uses the LangTest toolkit / leaderboard", "page": 1,
+         "quote": "we describe how to use the open-source toolkit LangTest (Nazir et al., 2024) to add scores from those aspects into LLM leaderboards"},
+        {"id": "he_gpt4", "match": ["GPT 4", "GPT-4", "GPT4"], "claim": "GPT 4 top on robustness and accuracy", "page": 1,
+         "quote": "GPT 4 achieves top performance on robustness and accuracy test"},
+        {"id": "he_llama2", "match": ["Llama 2", "Llama-2", "LLaMA 2", "Llama2"], "claim": "Llama 2 top on toxicity", "page": 1,
+         "quote": "Llama 2 achieves top performance on the toxicity test"}
+      ]
+    },
+    "How_Quantization_Shapes_Bias_in_Large_Language_Models": {
+      "facts": [
+        {"id": "qb_13", "match": ["13 benchmarks", "13 bias benchmarks", "thirteen benchmarks"], "claim": "13 benchmarks", "page": 1,
+         "quote": "We employ both probability- and generated text-based metrics across 13 benchmarks"},
+        {"id": "qb_gptq", "match": ["GPTQ"], "claim": "GPTQ quantization", "page": 3,
+         "quote": "three quantization methods: GPTQ, AWQ (weight-only quantization), and SQ (weight-activation quantization)"},
+        {"id": "qb_awq", "match": ["AWQ"], "claim": "AWQ quantization", "page": 3,
+         "quote": "three quantization methods: GPTQ, AWQ (weight-only quantization), and SQ"},
+        {"id": "qb_tox", "match": ["reduce model toxicity", "reduces toxicity", "reduce toxicity", "lower toxicity", "reduces model toxicity"],
+         "claim": "quantization can reduce toxicity", "page": 1,
+         "quote": "while it can reduce model toxicity and does not significantly impact sentiment, it tends to slightly increase stereotypes and unfairness"}
+      ]
+    },
+    "Toxic_Text_Classification_in_Portuguese_Is_LLaMA_3.1_8B_All_You_Need": {
+      "facts": [
+        {"id": "pt_061", "match": ["0.61"], "claim": "F1 0.61 before fine-tuning", "page": 1,
+         "quote": "fine-tuning significantly enhances the LLaMA model's F1-score from 0.61 to 0.75"},
+        {"id": "pt_075", "match": ["0.75"], "claim": "F1 0.75 after fine-tuning", "page": 1,
+         "quote": "fine-tuning significantly enhances the LLaMA model's F1-score from 0.61 to 0.75"},
+        {"id": "pt_bert", "match": ["BERTimbau"], "claim": "compared against BERTimbau", "page": 1,
+         "quote": "surpassing BERTimbau in precision and matching the performance of the GPT-4o mini"},
+        {"id": "pt_told", "match": ["ToLD-Br", "ToLD-br", "Told-Br", "TOLD-BR"], "claim": "ToLD-Br dataset", "page": 2,
+         "quote": "We employed the ToLD-br dataset"}
+      ]
+    },
+    "When_LLMs_Meet_Acoustic_Landmarks_Speech_for_Depression_Detection": {
+      "facts": [
+        {"id": "dl_daic", "match": ["DAIC-WOZ", "DAIC WOZ"], "claim": "evaluated on DAIC-WOZ", "page": 1,
+         "quote": "Evaluations of the proposed approach on the DAIC-WOZ dataset reveal state-of-the-art results"},
+        {"id": "dl_landmarks", "match": ["acoustic landmark", "Acoustic Landmark"], "claim": "uses acoustic landmarks", "page": 1,
+         "quote": "integrating speech signals into LLMs utilizing Acoustic Landmarks"},
+        {"id": "dl_sota", "match": ["state-of-the-art", "state of the art", "SOTA"], "claim": "state-of-the-art vs audio-text baselines", "page": 1,
+         "quote": "reveal state-of-the-art results when compared with existing Audio-Text baselines"}
+      ]
+    }
+  },
+  "questions": [
+    {"q": "What accuracy and false positive rate does ToxicDetector achieve on RealToxicityPrompts?",
+     "expect_papers": ["Efficient_Detection_of_Toxic_Prompts_in_Large_Language_Models"],
+     "expect": [["96.39"], ["2.00", "2.0%", "2%"]]},
+    {"q": "How much do student models fine-tuned with DToT rationales improve accuracy, and how much smaller are they than LLMs?",
+     "expect_papers": ["Efficient_Toxic_Content_Detection_by_Bootstrapping_and_Distilling_Large_Language_Models"],
+     "expect": [["16.9"], ["60"]]},
+    {"q": "What F1-score does the fine-tuned LLaMA 3.1 8B model reach on Portuguese toxic text, and what was it before fine-tuning?",
+     "expect_papers": ["Toxic_Text_Classification_in_Portuguese_Is_LLaMA_3.1_8B_All_You_Need"],
+     "expect": [["0.75"], ["0.61"]]},
+    {"q": "Which quantization methods were studied for their effect on bias in large language models?",
+     "expect_papers": ["How_Quantization_Shapes_Bias_in_Large_Language_Models"],
+     "expect": [["GPTQ"], ["AWQ"], ["SmoothQuant", "SQ"]]}
+  ],
+  "relevance": {
+    "topic": "LLM toxicity detection",
+    "focus": "Detecting toxic, harmful or jailbreak content with or in large language models. Exclude image-only and speech-only models.",
+    "note": "Labels are judgements: true = should be selected, false = should be rejected. Borderline cases were left out.",
+    "items": [
+      {"title": "GradSafe: Detecting Jailbreak Prompts for LLMs via Safety-Critical Gradient Analysis", "year": 2024,
+       "abstract": "We propose GradSafe, which detects jailbreak prompts by analysing the gradients of safety-critical parameters in LLMs.", "label": true},
+      {"title": "Efficient Detection of Toxic Prompts in Large Language Models", "year": 2024,
+       "abstract": "ToxicDetector is a lightweight greybox method that detects toxic prompts using LLM embeddings and an MLP classifier.", "label": true},
+      {"title": "Toxic Text Classification in Portuguese: Is LLaMA 3.1 8B All You Need?", "year": 2024,
+       "abstract": "We fine-tune LLaMA 3.1 8B for toxic and hate speech classification in Portuguese and compare with BERTimbau.", "label": true},
+      {"title": "RLShield: Dynamic Jailbreak Detection for LLMs via Reinforced Adaptive Learning", "year": 2026,
+       "abstract": "A reinforcement-learning based detector that adapts to new jailbreak strategies against large language models.", "label": true},
+      {"title": "Large Language Models for Toxic Language Detection in Low-Resource Languages", "year": 2025,
+       "abstract": "We evaluate LLM-based toxic language classifiers on low-resource languages with few labelled examples.", "label": true},
+      {"title": "An Adversarial Toxicity Prompt Generator Exploiting Multilingual Code-Switching", "year": 2025,
+       "abstract": "We generate code-switched adversarial toxic prompts and use them to test whether LLM toxicity detectors can be evaded.", "label": true},
+      {"title": "Detecting NSFW Images with Vision Transformers", "year": 2024,
+       "abstract": "An image-only classifier based on vision transformers that flags explicit pictures on social platforms.", "label": false,
+       "why": "image-only model: excluded by the focus"},
+      {"title": "Speech-Based Hate Detection with Wav2Vec 2.0", "year": 2024,
+       "abstract": "We classify hateful spoken utterances directly from audio with a self-supervised speech model, without transcripts.", "label": false,
+       "why": "speech-only model: excluded by the focus"},
+      {"title": "Protein Structure Prediction with Diffusion Models", "year": 2024,
+       "abstract": "We apply diffusion models to predict three-dimensional protein structures.", "label": false, "why": "unrelated"},
+      {"title": "Image-Based Diagnosis of Oral Lesions: Performance of a Vision-Language Model", "year": 2026,
+       "abstract": "We evaluate a vision-language model for diagnosing oral lesions from clinical photographs.", "label": false, "why": "unrelated clinical imaging"},
+      {"title": "Cooking with Large Language Models: Recipe Generation at Scale", "year": 2025,
+       "abstract": "We use large language models to generate and rank cooking recipes for home cooks.", "label": false, "why": "LLMs but unrelated task"},
+      {"title": "The emerging use of artificial intelligence in safety pharmacology", "year": 2026,
+       "abstract": "A review of AI methods for predicting drug toxicity in preclinical safety pharmacology.", "label": false,
+       "why": "chemical/drug toxicity, not toxic content"},
+      {"title": "Scaling Laws for Neural Language Models", "year": 2020,
+       "abstract": "We study how language model loss scales with model size, dataset size and compute.", "label": false, "why": "LLM paper, no toxicity"},
+      {"title": "A Survey of Hate Speech and Toxicity Detection Datasets for LLM Evaluation", "year": 2025,
+       "abstract": "We review datasets used to train and evaluate large language models for hate speech and toxicity detection.", "label": true}
+    ]
+  }
+}

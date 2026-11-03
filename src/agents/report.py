@@ -1,80 +1,47 @@
 import logging
 
-from src.llm.llm import llm
+from src.agents.common import (by_paper, complete, domain_text, error_text, history_block,
+                               input_budget_chars, truncate)
+from src.agents.prompts import ANSWER_PROMPT, REPORT_PROMPT
 from src.graph.state import ResearchState
+from src.research.prompts import data
+from src.reports import report_jobs
 
 logger = logging.getLogger(__name__)
 
-ERROR_PREFIXES = (
-    "No documents found to analyze.",
-    "Analysis failed:",
-    "No analysis available to compare.",
-    "comparison failed:",
-    "No comparison data available to analyze gaps.",
-    "Gap Detector failed:",
-)
+
+def failure_report(state: ResearchState) -> str:
+    errors = state.get("errors") or ["No analysis could be produced."]
+    lines = "\n".join(f"- {e}" for e in dict.fromkeys(errors))
+    return f"## No answer could be generated\n\n{lines}\n"
 
 
 def report_agent(state: ResearchState) -> dict:
     analysis = state.get("analysis", "")
-    comparison = state.get("comparison", "")
-    gaps = state.get("gaps", "")
-    domain = state.get("domain_classification", "")
+    if not analysis:
+        return {"report": failure_report(state)}
 
-    if (not analysis or not comparison or not gaps
-            or analysis.startswith(ERROR_PREFIXES)
-            or comparison.startswith(ERROR_PREFIXES)
-            or gaps.startswith(ERROR_PREFIXES)):
-        return {"report": "Insufficient data to generate a report."}
-
-    logger.info("Generating final report...")
-
-    history = state.get("history", "")
-    history_section = f"\nConversation History:\n{history}\n" if history else ""
-    domain_hint = f"\nField of study: {domain}\n" if domain else "\n"
-
-    prompt = f"""You are writing a comprehensive academic research synthesis report.{domain_hint}
-
-Synthesize the following data into a polished, detailed report. Integrate findings across papers — do not simply repeat the raw sections. Present a clear narrative.
-
-Original Question: {state.get("question", "")}
-{history_section}
-
---- PER-PAPER ANALYSES ---
-{analysis}
-
---- COMPARATIVE ANALYSIS ---
-{comparison}
-
---- RESEARCH GAPS ---
-{gaps}
-
-Produce the report with ALL of the following sections:
-
-# Executive Summary
-2-3 paragraphs covering what was studied, how, key findings, main gaps, and the most important next step.
-
-# Research Landscape
-Summarize the questions, data, methods, and approaches across all papers. What are the dominant paradigms? What are the outliers?
-
-# Key Findings
-Numbered list of the most important conclusions. For each, note the strength of evidence (e.g., "Supported by 3 papers" vs. "Single paper finding").
-
-# Comparative Analysis
-How papers differ on central dimensions. Trade-offs revealed between different approaches.
-
-# Limitations & Research Gaps
-Per-paper limitations and cross-cutting open problems. Missing investigations.
-
-# Future Directions
-Concrete next steps: what to investigate, what resources needed, estimated effort.
-
-# References
-List all paper IDs referenced in this report.
-
-Write in a formal academic tone. Be specific with numbers, names, and evidence. Prioritize well-supported claims and explicitly flag speculative or single-paper findings as preliminary."""
+    report_mode = state.get("mode") == "report"
+    report_jobs.update(state.get("job_id"), stage="writing report")
+    logger.info("Generating final %s...", "report" if report_mode else "answer")
+    template = REPORT_PROMPT if report_mode else ANSWER_PROMPT
+    question = state.get("question", "")
+    history = "" if report_mode else history_block(state)
+    budget = input_budget_chars(template) - len(question) - len(history) - len(state.get("topic", ""))
+    comparison = truncate(state.get("comparison") or "(not applicable)", int(budget * 0.25))
+    gaps = truncate(state.get("gaps") or "(none identified)", int(budget * 0.2))
+    analysis = truncate(analysis, budget - len(comparison) - len(gaps))
+    fields = dict(domain=domain_text(state), analysis=data(analysis), comparison=data(comparison), gaps=data(gaps))
+    if report_mode:
+        paper_ids = ", ".join(by_paper(state.get("documents", [])).keys())
+        prompt = template.format(topic=state.get("topic", "").replace("_", " "), paper_ids=paper_ids, **fields)
+    else:
+        prompt = template.format(question=data(question), history=history, **fields)
     try:
-        result = llm.invoke(prompt)
-        return {"report": result.content}
+        return {"report": complete(prompt)}
     except Exception as e:
-        return {"report": f"Report Generation failed: {e}"}
+        logger.exception("Report generation failed")
+        return {"report_failed": True,
+                "report": failure_report({**state, "errors": [*(state.get("errors") or []),
+                                                               error_text("Report generation", e)]}),
+                "errors": [error_text("Report generation", e)]}

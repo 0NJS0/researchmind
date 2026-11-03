@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens: calm neutrals with one indigo accent. Semantic colors for status only. */
+:root {
+  --background: oklch(0.985 0.002 264);
+  --foreground: oklch(0.21 0.02 264);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --muted: oklch(0.955 0.004 264);
+  --muted-foreground: oklch(0.52 0.02 264);
+  --border: oklch(0.91 0.006 264);
+  --input: oklch(0.89 0.008 264);
+  --primary: oklch(0.51 0.21 272);
+  --primary-foreground: oklch(0.99 0 0);
+  --primary-soft: oklch(0.95 0.035 272);
+  --ring: oklch(0.6 0.18 272);
+  --sidebar: oklch(0.97 0.004 264);
+  --success: oklch(0.5 0.12 155);   /* 5.7:1 on white, 5.0:1 on success-soft */
+  --success-soft: oklch(0.95 0.04 155);
+  --warning: oklch(0.52 0.12 60);   /* 5.7:1 on white, 5.1:1 on warning-soft */
+  --warning-soft: oklch(0.96 0.05 85);
+  --danger: oklch(0.58 0.2 25);
+  --danger-soft: oklch(0.96 0.03 25);
+  --info-soft: oklch(0.95 0.03 240);
+  --chart-1: #4f46e5;   /* validated: lightness band, chroma, contrast vs light surface */
+}
+
+.dark {
+  --background: oklch(0.17 0.012 264);
+  --foreground: oklch(0.94 0.006 264);
+  --card: oklch(0.205 0.014 264);
+  --card-foreground: var(--foreground);
+  --muted: oklch(0.25 0.014 264);
+  --muted-foreground: oklch(0.7 0.015 264);
+  --border: oklch(0.29 0.014 264);
+  --input: oklch(0.33 0.016 264);
+  --primary: oklch(0.68 0.16 272);
+  --primary-foreground: oklch(0.16 0.02 272);
+  --primary-soft: oklch(0.3 0.07 272);
+  --ring: oklch(0.68 0.16 272);
+  --sidebar: oklch(0.19 0.013 264);
+  --success: oklch(0.72 0.14 155);
+  --success-soft: oklch(0.3 0.06 155);
+  --warning: oklch(0.8 0.14 80);
+  --warning-soft: oklch(0.32 0.06 80);
+  --danger: oklch(0.7 0.17 25);
+  --danger-soft: oklch(0.32 0.07 25);
+  --info-soft: oklch(0.3 0.05 240);
+  --chart-1: #7479e6;   /* validated against the dark surface */
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info-soft: var(--info-soft);
+  --color-chart-1: var(--chart-1);
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --animate-fade-in: fade-in 0.2s ease-out;
+  --animate-slide-in: slide-in 0.25s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
+
+@layer base {
+  * { border-color: var(--border); }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--primary-soft); }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+}
+
+/* Long-form markdown (answers, reports, analyses). */
+.prose-rm {
+  @apply prose prose-zinc max-w-none dark:prose-invert
+    prose-headings:font-semibold prose-headings:tracking-tight
+    prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-8 prose-h3:text-base
+    prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+    prose-table:text-sm prose-th:bg-muted prose-th:px-3 prose-th:py-2 prose-td:px-3 prose-td:py-2
+    prose-code:before:content-none prose-code:after:content-none;
+}
+.prose-rm table { @apply block overflow-x-auto; }
+.prose-rm > :first-child { margin-top: 0; }
+
+.scrollbar-thin { scrollbar-width: thin; }

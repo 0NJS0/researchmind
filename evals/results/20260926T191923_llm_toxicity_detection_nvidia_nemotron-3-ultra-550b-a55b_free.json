@@ -1,0 +1,207 @@
+{
+  "topic": "LLM_Toxicity_Detection",
+  "gold": "llm_toxicity_detection.json",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "fast_model": "nvidia/nemotron-3-super-120b-a12b:free",
+  "started_at": "2026-09-26T19:19:23+00:00",
+  "only": [
+    "ask",
+    "gaps",
+    "relevance",
+    "summary"
+  ],
+  "summaries": [
+    {
+      "paper": "Efficient_Detection_of_Toxic_Prompts_in_Large_Language_Models",
+      "chars": 86285,
+      "statements": 25,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 1,
+      "unsupported_examples": {
+        "Concept prompt augmentation boosts F1 significantly (e.g., Insult +0.1557); processing time 0.0780 seconds/prompt; training ~89 seconds for 100 epochs.": [
+          "89"
+        ]
+      },
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 48.4
+    },
+    {
+      "paper": "Efficient_Toxic_Content_Detection_by_Bootstrapping_and_Distilling_Large_Language_Models",
+      "chars": 55178,
+      "statements": 27,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 1,
+      "ok": true,
+      "requests": 1,
+      "seconds": 59.3
+    },
+    {
+      "paper": "Holistic_Evaluation_of_Large_Language_Models_Robustness_Accuracy_and_Toxicity",
+      "chars": 40247,
+      "statements": 12,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 50.8
+    },
+    {
+      "paper": "How_Quantization_Shapes_Bias_in_Large_Language_Models",
+      "chars": 172099,
+      "statements": 27,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 1,
+      "unsupported_examples": {
+        "Greedy decoding (temperature=0), max 2000 tokens for reasoning tasks, 250 tokens for toxicity/sentiment; significance via approximate randomization test (10,000 iterations, α=0.05).": [
+          "2000"
+        ]
+      },
+      "inferred_with_numbers": 1,
+      "ok": true,
+      "requests": 3,
+      "seconds": 153.1
+    },
+    {
+      "paper": "Toxic_Text_Classification_in_Portuguese_Is_LLaMA_3.1_8B_All_You_Need",
+      "chars": 28763,
+      "statements": 19,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 147.3
+    },
+    {
+      "paper": "When_LLMs_Meet_Acoustic_Landmarks_Speech_for_Depression_Detection",
+      "chars": 58777,
+      "statements": 29,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 87.0
+    }
+  ],
+  "answers": [
+    {
+      "question": "What accuracy and false positive rate does ToxicDetector achieve on RealToxicityPrompts?",
+      "facts_found": 2,
+      "facts_expected": 2,
+      "correct": true,
+      "cites_expected_paper": true,
+      "citations": 2,
+      "citations_verified": 2,
+      "citation_validity": 1.0,
+      "unverified": [],
+      "errors": [],
+      "ok": true,
+      "answer": "## Answer\nOn the RealToxicityPrompts dataset (10,000 sampled toxic prompts), ToxicDetector achieves an **overall accuracy of 96.39%** and an **overall false positive rate of 2.00%** (reported as 0.02 in decimal form) [Efficient_Detection_of_Toxic_Prompts_in_Large_Language_Models, p.1; p.2; p.7; p.8]. The average F1 score is 0.9628 (also reported as 0.9635 across the Gemma-2 and Llama series) [Efficient_Detection_of_Toxic_Prompts_in_Large_Language_Models, p.7].\n\nPer-model breakdowns (Table 3) show variation across backbones:\n- Llama2-7b: Accuracy 92.83%, FPR 1.0%, F1 0.9228\n- Llama2-13b: Accuracy 97.83%, FPR 1.3%, F1 0.9781\n- Llama3-8b: FPR 1.0%, F1 0.9653 (accuracy not fully shown in excerpt)\n- Gemma-2: Included in the 0.9635 cross-series F1 average [Efficient_Detection_of_Toxic_Prompts_in_Large_Language_Models, p.8].\n\n## Evidence by paper\n- **Efficient_Detection_of_Toxic_Prompts_in_Large_Language_Models**: Reports overall accuracy (96.39%), overall FPR (2.00% / 0.02), and average F1 (0.9628 / 0.9635) on RealToxicityPrompts [p.1; p.2; p.7; p.8]. Provides per-model results for Llama2-7b, Llama2-13b, Llama3-8b, and Gemma-2 in Table 3 [p.8].\n\n## Gaps and open questions\n- **Backbone dependency**: Performance varies substantially with the embedding model (Llama2-7b accuracy 92.83% vs. Llama2-13b 97.83%) [p.7; p.8]. The paper notes larger/newer models yield better embeddings, but systematic evaluation across diverse open-weight LLMs (Mistral, Qwen, Phi, etc.) is absent.\n- **Demographic/linguistic coverage**: Evaluation is limited to English benchmarks (RealToxicityPrompts, SafetyPromptCollections) and two model families; no multilingual or subgroup analysis is reported [p.6; p.8].\n- **Adversarial robustness**: No evaluation against prompt-injection, typo-based evasion, or gradient-based attacks is reported [p.6–p.8].\n\n## Confidence and caveats\n- **Supported by a single paper**; the overall accuracy and FPR figures are explicitly stated in multiple locations (abstract, introduction, results tables).\n- The per-model accuracy for Llama3-8b and Gemma-2 is not fully visible in the provided excerpts; only F1 and FPR are shown for Llama3-8b, and Gemma-2 appears only in the cross-series F1 average.\n- The 10,000-prompt sample from RealToxicityPrompts is described as \"orthogonal to SafetyPromptCollections\" but the sampling strategy (random vs. stratified) is not detailed in the excerpts.",
+      "requests": 4,
+      "seconds": 117.7
+    },
+    {
+      "question": "How much do student models fine-tuned with DToT rationales improve accuracy, and how much smaller are they than LLMs?",
+      "facts_found": 2,
+      "facts_expected": 2,
+      "correct": true,
+      "cites_expected_paper": true,
+      "citations": 3,
+      "citations_verified": 3,
+      "citation_validity": 1.0,
+      "unverified": [],
+      "errors": [],
+      "ok": true,
+      "answer": "## Answer\nStudent models fine-tuned with DToT rationales (FC-T5 3B, Flan-T5-XL 3B, Flan-T5-L 770M) show measurable accuracy gains over multiple baselines. Compared with fine-tuning on labels only, adding DToT rationales increases accuracy by up to **2.54%**, F1 by up to **2.46%**, and AUC by up to **1.94%** [Efficient_Toxic_Content_Detection_by_Bootstrapping_and_Distilling_Large_Language_Models, p.6]. Against the prior state-of-the-art (RoBERTa fine-tuned on the same datasets), the DToT-rationale student LM improves accuracy by up to **15.80%**, F1 by up to **11.49%**, and AUC by up to **13.22%** [Efficient_Toxic_Content_Detection_by_Bootstrapping_and_Distilling_Large_Language_Models, p.6]. The student LM (FC-T5) even outperforms the teacher LLM (ChatGPT) by up to **16.90% in accuracy** [Efficient_Toxic_Content_Detection_by_Bootstrapping_and_Distilling_Large_Language_Models, p.6]. On model size, the paper states these student LMs are **“more than 60× smaller than conventional LLMs”** [Efficient_Toxic_Content_Detection_by_Bootstrapping_and_Distilling_Large_Language_Models, p.1; p.2; p.6], but the exact parameter count of the teacher (ChatGPT) is not reported, so the compression ratio cannot be independently verified from the provided material.\n\n## Evidence by paper\n- **Efficient_Toxic_Content_Detection_by_Bootstrapping_and_Distilling_Large_Language_Models**  \n  - Labels-only → labels + DToT rationales: accuracy +2.54%, F1 +2.46%, AUC +1.94% (max across datasets) [p.6]  \n  - vs. RoBERTa SOTA: accuracy +15.80%, F1 +11.49%, AUC +13.22% (max) [p.6]  \n  - Student (FC-T5) vs. teacher (ChatGPT): student outperforms teacher by up to 16.90% accuracy [p.6]  \n  - Ablation on Toxigen: FC-T5 3B 84.99% → 87.53%; Flan-T5-XL 3B 85.54% → 87.53%; Flan-T5-L 770M 83.44% → 84.22% [p.7]  \n  - Size claim: student LMs “more than 60× smaller than conventional LLMs” [p.1; p.2; p.6]  \n  - Teacher parameter count not disclosed; student sizes explicitly given (FC-T5 3B, Flan-T5-XL 3B, Flan-T5-L 770M) [Data/material; Limitations]\n\n## Gaps and open questions\n- **Exact compression ratio unverifiable**: The “>60× smaller” claim is qualitative; ChatGPT’s parameter count is not reported, preventing independent calculation of the size reduction [Limitations].\n- **Statistical significance not reported**: All metric improvements (1–16%) lack p-values or confidence intervals, so reliability of the gains is uncertain [Limitations].\n- **Single teacher model**: Only ChatGPT is used; rationale quality and downstream gains with other teachers (GPT-4, Llama-3, etc.) are unknown [Limitations].\n- **Limited dataset scope**: Cross-dataset transfer tested on only three toxic-content datasets (Toxigen, SBIC, DHate) [Limitations].\n\n## Confidence and caveats\nSupported by a single paper. The accuracy/F1/AUC improvements are directly reported with specific numbers, but the absence of significance testing and the qualitative size claim (“>60×”) mean the practical magnitude of both improvements and compression should be treated as preliminary until confirmed with statistical rigor and an explicit teacher-model parameter count.",
+      "requests": 4,
+      "seconds": 101.9
+    },
+    {
+      "question": "What F1-score does the fine-tuned LLaMA 3.1 8B model reach on Portuguese toxic text, and what was it before fine-tuning?",
+      "facts_found": 2,
+      "facts_expected": 2,
+      "correct": true,
+      "cites_expected_paper": true,
+      "citations": 1,
+      "citations_verified": 1,
+      "citation_validity": 1.0,
+      "unverified": [],
+      "errors": [],
+      "ok": true,
+      "answer": "## Answer\nThe fine-tuned LLaMA 3.1 8B model reaches an F1-score of **0.75** on Portuguese toxic text classification (ToLD-Br held-out test set). Before fine-tuning, the same model with the best evolved prompt achieved an F1-score of **0.61**. Fine-tuning therefore improved the F1-score by 0.14 points (from 0.61 to 0.75) [Toxic_Text_Classification_in_Portuguese_Is_LLaMA_3.1_8B_All_You_Need, p.1; p.6; p.7].\n\n## Evidence by paper\n- **Toxic_Text_Classification_in_Portuguese_Is_LLaMA_3.1_8B_All_You_Need** – Reports pre-fine-tuning F1 = 0.61 and post-fine-tuning F1 = 0.75 on the ToLD-Br test set using the best prompt from iterative prompt evolution [p.1; p.6; p.7].\n\n## Gaps and open questions\n- The paper provides only single-run point estimates (no variance across seeds or cross-validation folds) [Toxic_Text_Classification_in_Portuguese_Is_LLaMA_3.1_8B_All_You_Need, p.1; p.7].\n- Results are limited to the ToLD-Br dataset; no out-of-domain evaluation on other Portuguese toxicity corpora is reported [Toxic_Text_Classification_in_Portuguese_Is_LLaMA_3.1_8B_All_You_Need, p.2].\n- No ablation isolates the contribution of the iterative prompt evolution itself versus the fine-tuning step [Toxic_Text_Classification_in_Portuguese_Is_LLaMA_3.1_8B_All_You_Need, p.4; p.6].\n\n## Confidence and caveats\nSupported by a single paper. The reported F1-scores (0.61 → 0.75) are point estimates from one held-out test set run; confidence intervals or multi-seed variability are not provided, so the true expected improvement could differ.",
+      "requests": 4,
+      "seconds": 98.6
+    },
+    {
+      "question": "Which quantization methods were studied for their effect on bias in large language models?",
+      "facts_found": 3,
+      "facts_expected": 3,
+      "correct": true,
+      "cites_expected_paper": true,
+      "citations": 4,
+      "citations_verified": 4,
+      "citation_validity": 1.0,
+      "unverified": [],
+      "errors": [],
+      "ok": true,
+      "answer": "## Answer\nThe paper \"How Quantization Shapes Bias in Large Language Models\" studied three post-training quantization (PTQ) methods for their effects on bias across multiple dimensions in large language models: **Generalized Post-Training Quantization (GPTQ)**, **Activation-aware Weight Quantization (AWQ)**, and **SmoothQuant (SQ)** [How_Quantization_Shapes_Bias_in_Large_Language_Models, p.1]. GPTQ and AWQ are weight-only quantization methods, while SQ is a weight-activation quantization method [How_Quantization_Shapes_Bias_in_Large_Language_Models, p.3]. The evaluation covered multiple bit-width configurations: GPTQ at W4 and W8; AWQ at W3, W4, and W8; and SQ at W4A8 and W8A8 [How_Quantization_Shapes_Bias_in_Large_Language_Models, p.3]. This is a single-paper finding; no other papers in the provided material address the question.\n\n## Evidence by paper\n- **How_Quantization_Shapes_Bias_in_Large_Language_Models**: Identifies three quantization methods studied — GPTQ, AWQ, and SQ — with their respective bit-width settings (GPTQ: W4, W8; AWQ: W3, W4, W8; SQ: W4A8, W8A8). Notes that GPTQ and AWQ are weight-only, while SQ quantizes both weights and activations. Evaluates bias impact across 13 benchmarks covering stereotypes, fairness, toxicity, and sentiment across gender, race, and religion subgroups on four models (LLaMA-3.1-8B-Instruct, Qwen2.5-14B-Instruct, DeepSeek-R1-Distill-LLaMA-8B, DeepSeek-R1-Distill-Qwen-14B) [How_Quantization_Shapes_Bias_in_Large_Language_Models, p.1; p.3].\n\n## How the papers compare\nOnly one paper is provided; no cross-paper comparison is possible.\n\n## Gaps and open questions\n- **Unexplored quantization methods**: The study covers only GPTQ, AWQ, and SmoothQuant. Other widely used PTQ methods (e.g., OmniQuant, QuIP, SpQR, mixed-precision approaches) and quantization-aware training (QAT) methods are not evaluated for bias effects [How_Quantization_Shapes_Bias_in_Large_Language_Models, p.1; p.3].\n- **Limited model coverage**: Only four decoder-only models (8B–14B) are tested; no encoder-decoder, MoE, or larger (>14B) models are included, so generalizability of the bias findings to other architectures is unknown [How_Quantization_Shapes_Bias_in_Large_Language_Models, p.1; p.3].\n- **Demographic scope**: Bias analysis is limited to gender, race, and religion; age, disability, sexual orientation, nationality, and intersectional subgroups are not examined [How_Quantization_Shapes_Bias_in_Large_Language_Models, p.1; p.3].\n- **No mechanistic explanation**: The paper observes that stronger quantization exacerbates bias but does not provide layer-wise or head-wise analysis linking quantization error to specific bias mechanisms [How_Quantization_Shapes_Bias_in_Large_Language_Models, p.9].\n\n## Confidence and caveats\nThe answer is based on a single paper that explicitly lists the three quantization methods studied. The evidence is complete for the question as framed (which methods were studied in this paper), but the broader field may have other studies not included in the provided material. The paper’s evaluation is extensive (13 benchmarks, multiple models, multiple bit-widths), but the gaps above indicate where the studied method set is narrow relative to the full quantization landscape.",
+      "requests": 4,
+      "seconds": 82.8
+    }
+  ],
+  "relevance": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "tn": 7,
+    "fn": 0,
+    "mistakes": [],
+    "requests": 3,
+    "seconds": 36.7
+  },
+  "live_gaps": {
+    "gaps": 21,
+    "generic": 0,
+    "multi_paper": 13,
+    "checked": 4,
+    "confidence": {
+      "high": 4,
+      "medium": 7,
+      "low": 10
+    }
+  },
+  "requests": 28,
+  "headline": {
+    "summary_fact_recall": 1.0,
+    "summary_empty_or_failed": 0,
+    "summary_unsupported_number_statements": 2,
+    "answers_correct": "4/4",
+    "answer_citation_validity": 1.0,
+    "answers_uncited": 0,
+    "relevance_accuracy": 1.0,
+    "requests": 28
+  }
+}
