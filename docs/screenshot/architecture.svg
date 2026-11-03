@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Inter, 'Segoe UI', Helvetica, Arial, 'DejaVu Sans', sans-serif"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#818cf8"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker></defs><rect width="1920" height="1080" fill="#0b0d12"/>
+<text x="60" y="74" font-size="40" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">ResearchMind · architecture</text>
+<text x="60" y="114" font-size="21" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">A self-hosted literature-review assistant. One Docker container, free LLMs only, running 24/7.</text>
+<rect x="40" y="140" width="1430" height="910" rx="20" fill="none" stroke="#3a4258" stroke-width="1.5" stroke-dasharray="8 7"/>
+<text x="64" y="172" font-size="15" fill="#9aa3b2" font-weight="700" text-anchor="start" xml:space="preserve">DOCKER CONTAINER</text>
+<rect x="70" y="190" width="330" height="445" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<text x="92" y="231" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">React UI</text>
+<text x="92" y="266" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">React 19 · TypeScript · Tailwind</text>
+<text x="92" y="297" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve"></text>
+<text x="92" y="328" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Autopilot</text>
+<text x="92" y="359" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Papers</text>
+<text x="92" y="390" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Research gaps</text>
+<text x="92" y="421" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Topic validator</text>
+<text x="92" y="452" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Library</text>
+<text x="92" y="483" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Ask</text>
+<text x="92" y="514" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Reports</text>
+<text x="92" y="545" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Status</text>
+<polyline points="235,637 235,671" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#ah)" stroke-linejoin="round"/>
+<rect x="70" y="675" width="330" height="345" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<text x="92" y="716" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">FastAPI backend</text>
+<text x="92" y="751" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">Serves the UI and REST API</text>
+<text x="92" y="782" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve"></text>
+<text x="92" y="813" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  PDF upload → chunk → embed</text>
+<text x="92" y="844" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Streaming answers</text>
+<text x="92" y="875" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Background jobs</text>
+<text x="92" y="906" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  Health &amp; free-quota status</text>
+<text x="92" y="937" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  CSV / report export</text>
+<polyline points="402,735 434,735" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#ah)" stroke-linejoin="round"/>
+<polyline points="402,915 434,915" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#ah)" stroke-linejoin="round"/>
+<rect x="440" y="190" width="1000" height="590" rx="18" fill="#12151d" stroke="#343b52" stroke-width="1.5"/>
+<text x="468" y="230" font-size="25" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Autopilot</text>
+<text x="625" y="230" font-size="18" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">24/7 worker · one paper at a time · resumes after restarts</text>
+<rect x="470" y="260" width="290" height="160" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<circle cx="504" cy="294" r="14" fill="#818cf8"/>
+<text x="504" y="300" font-size="16" fill="#0b0d12" font-weight="700" text-anchor="middle" xml:space="preserve">1</text>
+<text x="528" y="301" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Discover</text>
+<text x="492" y="336" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">SearXNG + OpenAlex</text>
+<text x="492" y="362" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">queries grow from the</text>
+<text x="492" y="388" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">papers and gaps so far</text>
+<rect x="800" y="260" width="290" height="160" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<circle cx="834" cy="294" r="14" fill="#818cf8"/>
+<text x="834" y="300" font-size="16" fill="#0b0d12" font-weight="700" text-anchor="middle" xml:space="preserve">2</text>
+<text x="858" y="301" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Screen &amp; rank</text>
+<text x="822" y="336" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">relevance · recency</text>
+<text x="822" y="362" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">citations · peer review</text>
+<text x="822" y="388" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">duplicates merged</text>
+<rect x="1130" y="260" width="280" height="160" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<circle cx="1164" cy="294" r="14" fill="#818cf8"/>
+<text x="1164" y="300" font-size="16" fill="#0b0d12" font-weight="700" text-anchor="middle" xml:space="preserve">3</text>
+<text x="1188" y="301" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Full text</text>
+<text x="1152" y="336" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">open-access copies only</text>
+<text x="1152" y="362" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">OpenAlex · arXiv</text>
+<text x="1152" y="388" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">Semantic Scholar</text>
+<polyline points="762,340 795,340" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#ah)" stroke-linejoin="round"/>
+<polyline points="1092,340 1125,340" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#ah)" stroke-linejoin="round"/>
+<polyline points="1270,422 1270,455" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#ah)" stroke-linejoin="round"/>
+<rect x="470" y="460" width="290" height="150" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<circle cx="504" cy="494" r="14" fill="#818cf8"/>
+<text x="504" y="500" font-size="16" fill="#0b0d12" font-weight="700" text-anchor="middle" xml:space="preserve">5</text>
+<text x="528" y="501" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Publish</text>
+<text x="492" y="536" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">Library (pgvector)</text>
+<text x="492" y="562" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">living report updated</text>
+<rect x="800" y="460" width="610" height="150" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<circle cx="834" cy="494" r="14" fill="#818cf8"/>
+<text x="834" y="500" font-size="16" fill="#0b0d12" font-weight="700" text-anchor="middle" xml:space="preserve">4</text>
+<text x="858" y="501" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Analyse</text>
+<rect x="824" y="522" width="107" height="36" rx="18" fill="#1e2142" stroke="#3b4080" stroke-width="1.5"/>
+<text x="877.5" y="546" font-size="16" fill="#c7cbff" font-weight="600" text-anchor="middle" xml:space="preserve">Summary</text>
+<text x="944" y="546" font-size="18" fill="#9aa3b2" font-weight="400" text-anchor="middle" xml:space="preserve">→</text>
+<rect x="957" y="522" width="140" height="36" rx="18" fill="#1e2142" stroke="#3b4080" stroke-width="1.5"/>
+<text x="1027.0" y="546" font-size="16" fill="#c7cbff" font-weight="600" text-anchor="middle" xml:space="preserve">Comparison</text>
+<text x="1110" y="546" font-size="18" fill="#9aa3b2" font-weight="400" text-anchor="middle" xml:space="preserve">→</text>
+<rect x="1123" y="522" width="74" height="36" rx="18" fill="#1e2142" stroke="#3b4080" stroke-width="1.5"/>
+<text x="1160.0" y="546" font-size="16" fill="#c7cbff" font-weight="600" text-anchor="middle" xml:space="preserve">Gaps</text>
+<text x="1210" y="546" font-size="18" fill="#9aa3b2" font-weight="400" text-anchor="middle" xml:space="preserve">→</text>
+<rect x="1223" y="522" width="129" height="36" rx="18" fill="#1e2142" stroke="#3b4080" stroke-width="1.5"/>
+<text x="1287.5" y="546" font-size="16" fill="#c7cbff" font-weight="600" text-anchor="middle" xml:space="preserve">Synthesis</text>
+<text x="824" y="590" font-size="15" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">LLM proposes, code decides: gap confidence comes from evidence</text>
+<polyline points="798,535 765,535" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#ah)" stroke-linejoin="round"/>
+<polyline points="615,457 615,425" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#ah)" stroke-linejoin="round"/>
+<text x="628" y="446" font-size="14" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">next paper</text>
+<rect x="470" y="640" width="940" height="115" rx="14" fill="#14211a" stroke="#2f6b45" stroke-width="1.5"/>
+<text x="494" y="676" font-size="21" fill="#4ade80" font-weight="700" text-anchor="start" xml:space="preserve">Gap check</text>
+<text x="640" y="676" font-size="18" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">Is the gap still open, or did someone already fill it?</text>
+<text x="494" y="706" font-size="16" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">Searches beyond the review; a critic LLM labels each gap</text>
+<text x="494" y="734" font-size="16" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">still open  ·  partly addressed  ·  addressed   →  papers that fill it join the queue</text>
+<polyline points="468,700 455,700 455,340 467,340" fill="none" stroke="#4ade80" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#ahg)" stroke-linejoin="round"/>
+<rect x="440" y="810" width="315" height="210" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<text x="462" y="851" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Ask (RAG)</text>
+<text x="462" y="886" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">pgvector retrieval</text>
+<text x="462" y="912" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">grounded answers with</text>
+<text x="462" y="938" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">page-level citations</text>
+<text x="462" y="964" font-size="17" fill="#818cf8" font-weight="400" text-anchor="start" xml:space="preserve">[paper, p.4]</text>
+<rect x="780" y="810" width="315" height="210" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<text x="802" y="851" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Topic validator</text>
+<text x="802" y="886" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">specific enough? → rivals</text>
+<text x="802" y="912" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">→ duplication test</text>
+<text x="802" y="938" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">→ field density → pivots</text>
+<text x="802" y="964" font-size="17" fill="#818cf8" font-weight="400" text-anchor="start" xml:space="preserve">AI is the critic, not the author</text>
+<rect x="1120" y="810" width="320" height="210" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<text x="1142" y="851" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Full report</text>
+<text x="1142" y="886" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">LangGraph pipeline:</text>
+<text x="1142" y="912" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">retrieve → classify → analyse</text>
+<text x="1142" y="938" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">→ compare → gaps → report</text>
+<text x="1142" y="964" font-size="17" fill="#818cf8" font-weight="400" text-anchor="start" xml:space="preserve">re-reads every paper</text>
+<text x="1520" y="172" font-size="15" fill="#9aa3b2" font-weight="700" text-anchor="start" xml:space="preserve">SERVICES</text>
+<rect x="1520" y="190" width="360" height="260" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<text x="1542" y="231" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">PostgreSQL + pgvector</text>
+<text x="1542" y="266" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  chunks &amp; embeddings</text>
+<text x="1542" y="297" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  topics, papers, gaps</text>
+<text x="1542" y="328" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  LLM response cache</text>
+<text x="1542" y="359" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  autopilot state</text>
+<text x="1542" y="390" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve">tables created on startup</text>
+<rect x="1520" y="475" width="360" height="305" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<text x="1542" y="516" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">LLM via OpenRouter</text>
+<text x="1542" y="551" font-size="17" fill="#818cf8" font-weight="400" text-anchor="start" xml:space="preserve">free models only (NVIDIA Nemotron)</text>
+<text x="1542" y="582" font-size="17" fill="#9aa3b2" font-weight="400" text-anchor="start" xml:space="preserve"></text>
+<text x="1542" y="613" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  fallback models on rate limit</text>
+<text x="1542" y="644" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  request pacing</text>
+<text x="1542" y="675" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  daily-quota guard</text>
+<text x="1542" y="706" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  schema-validated JSON</text>
+<text x="1542" y="737" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  paid models refused</text>
+<rect x="1520" y="810" width="360" height="210" rx="14" fill="#181c26" stroke="#2a3040" stroke-width="1.5"/>
+<text x="1542" y="851" font-size="21" fill="#e7e9ee" font-weight="700" text-anchor="start" xml:space="preserve">Paper sources</text>
+<text x="1542" y="886" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  SearXNG (self-hosted)</text>
+<text x="1542" y="917" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  OpenAlex: citations, peer</text>
+<text x="1542" y="948" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">    review, open-access PDFs</text>
+<text x="1542" y="979" font-size="17" fill="#e7e9ee" font-weight="400" text-anchor="start" xml:space="preserve">•  arXiv · Semantic Scholar</text>
+<polyline points="1478,320 1512,320" fill="none" stroke="#818cf8" stroke-width="2" marker-start="url(#ah)" marker-end="url(#ah)" stroke-linejoin="round"/>
+<polyline points="1478,627 1512,627" fill="none" stroke="#818cf8" stroke-width="2" marker-start="url(#ah)" marker-end="url(#ah)" stroke-linejoin="round"/>
+<polyline points="1478,915 1512,915" fill="none" stroke="#818cf8" stroke-width="2" marker-start="url(#ah)" marker-end="url(#ah)" stroke-linejoin="round"/></svg>

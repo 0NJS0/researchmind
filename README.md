@@ -18,12 +18,7 @@ Research assistant for literature reviews:
 
 It runs as a single container: a FastAPI backend that also serves the React UI. PostgreSQL, SearXNG and the LLM (OpenRouter) are external services.
 
-```
-React UI (frontend/) ──► FastAPI (src/api) ──► PostgreSQL + pgvector   (chunks, research sessions, LLM cache)
-                             │           └──► OpenRouter              (chat + embeddings, free models)
-                             │           └──► SearXNG                 (web search for the research agent)
-                             └── LangGraph pipelines (src/graph, src/research/agent.py)
-```
+![ResearchMind architecture](docs/screenshot/architecture.png)
 
 ## Screenshots
 
