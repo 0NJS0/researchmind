@@ -22,3 +22,23 @@ papers/
 # IDE
 .vscode/
 .idea/
+
+# Research agent data
+data/
+
+# Frontend
+node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+
+# Personal files that must never be committed
+*_CV.pdf
+*CV*.pdf
+prep/
+
+# Local test database (pgserver)
+.pgtest/
+
+# Eval corpus: third-party papers, download them yourself (see evals/corpus/README.md)
+evals/corpus/*
+!evals/corpus/README.md

@@ -1,0 +1,71 @@
+{
+  "topic": "Unemployment and health",
+  "corpus_dir": "evals/corpus/public_health_economics",
+  "note": "Cross-field check (public health + economics). Papers are open-access full texts stored in corpus_dir, not in the Library. Every fact has the exact source sentence. The systematic-review PROTOCOL reports no results — its summary must describe planned methods, not findings.",
+  "papers": {
+    "unemployment_metabolic_syndrome_40y_cohort": {
+      "facts": [
+        {"id": "ms_cohort", "match": ["Northern Swedish Cohort"], "claim": "Northern Swedish Cohort", "quote": "Data from the Northern Swedish Cohort was used, a longitudinal study of school leavers from 1981."},
+        {"id": "ms_retention", "match": ["90%", "90 %", "90 percent"], "claim": "retention rate 90%", "quote": "Over the 40-year period, the retention rate was 90%."},
+        {"id": "ms_age56", "match": ["age 56", "56 years", "aged 56"], "claim": "MetS measured at age 56", "quote": "MetS at age 56 was measured with clinical examinations"},
+        {"id": "ms_24m", "match": [">24 months", "24 months", "more than 24 months", "over 24 months"], "claim": "long-term exposure >24 months", "quote": "long-term exposure to unemployment during life (>24 months) was related to MetS among women"},
+        {"id": "ms_2230", "match": ["22–30", "22-30", "22 to 30"], "claim": "sensitive period age 22–30", "quote": "exposure to unemployment >24 months during age 22–30 was related to MetS in adult life among both men and women"},
+        {"id": "ms_logit", "match": ["logistic regression"], "claim": "logistic regression", "quote": "the contribution to risk from each month of exposure was also analysed, using logistic regression"}
+      ]
+    },
+    "suicide_unemployed_youth_cross_sectional": {
+      "facts": [
+        {"id": "su_age", "match": ["15–35", "15-35", "15 to 35"], "claim": "unemployed youth aged 15–35", "quote": "Eligible studies will focus on unemployed youth aged 15–35 years residing in SSA countries"},
+        {"id": "su_prisma", "match": ["PRISMA"], "claim": "follows PRISMA", "quote": "The review will be conducted and reported following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) statement."},
+        {"id": "su_re", "match": ["random-effects", "random effects"], "claim": "random-effects meta-analysis planned", "quote": "Prevalence estimates will be pooled using random-effects meta-analysis where appropriate."},
+        {"id": "su_ssa", "match": ["sub-Saharan Africa", "SSA"], "claim": "sub-Saharan Africa", "quote": "among unemployed youth in sub-Saharan Africa"},
+        {"id": "su_prospero", "match": ["CRD42025642679", "PROSPERO"], "claim": "PROSPERO registration", "quote": "PROSPERO registration number CRD42025642679."}
+      ]
+    },
+    "neet_young_adults_scoping_review": {
+      "facts": [
+        {"id": "ne_159", "match": ["159"], "claim": "159 studies included", "quote": "A total of 159 studies were included, classified into 11 topics."},
+        {"id": "ne_11", "match": ["11 topics", "11 themes", "eleven topics", "11 categories", "11 thematic", "11 topic"], "claim": "11 topics", "quote": "A total of 159 studies were included, classified into 11 topics."},
+        {"id": "ne_period", "match": ["2021 to April 2024", "2021–April 2024", "2021-April 2024", "2021 and April 2024", "April 2024"], "claim": "literature 2021–April 2024", "quote": "covering literature from 2021 to April 2024"},
+        {"id": "ne_jbi", "match": ["Joanna Briggs", "JBI"], "claim": "JBI framework", "quote": "This scoping review was conducted following the Joanna Briggs Institute (JBI) framework"},
+        {"id": "ne_dbs", "match": ["Scopus"], "claim": "searched PubMed, Scopus, Web of Science", "quote": "A systematic search was conducted in PubMed, Scopus, and Web of Science"}
+      ]
+    },
+    "disability_rolls_decline_in_unemployment": {
+      "facts": [
+        {"id": "di_60", "match": ["60 percent", "60%", "sixty percent"], "claim": "DI share rose by 60 percent", "quote": "the share of non-elderly adults receiving Social Security Disability Insurance income (DI) rose by 60 percent to 5.3 million beneficiaries"},
+        {"id": "di_53", "match": ["5.3 million"], "claim": "5.3 million beneficiaries", "quote": "rose by 60 percent to 5.3 million beneficiaries"},
+        {"id": "di_half", "match": ["half a percentage point", "0.5 percentage point", "one half percentage point", "half percentage point"], "claim": "unemployment lowered by half a percentage point", "quote": "... unemployment by one half a percentage point."},
+        {"id": "di_repl", "match": ["replacement rate"], "claim": "rising earnings replacement rate", "quote": "an unforeseen increase in the earnings replacement rate"},
+        {"id": "di_screen", "match": ["screening stringency", "screening"], "claim": "reduced screening stringency", "quote": "reduced screening stringency, declining demand for less skilled workers"}
+      ]
+    }
+  },
+  "questions": [],
+  "relevance": {
+    "topic": "Youth unemployment and mental health",
+    "focus": "Empirical or review studies of young people (roughly 15-35) and mental health outcomes. Exclude studies only of adults over 50 and animal studies.",
+    "note": "true = should be selected, false = should be rejected.",
+    "items": [
+      {"title": "Youth unemployment and depressive symptoms: a 10-year longitudinal cohort study", "year": 2023,
+       "abstract": "We follow 4,000 young adults aged 18-25 and relate spells of unemployment to later depressive symptoms.", "label": true},
+      {"title": "Young adults not in education, employment, or training (NEET): a global scoping review", "year": 2025,
+       "abstract": "A scoping review of 159 studies on NEET young adults, including mental health difficulties and social exclusion.", "label": true},
+      {"title": "Unemployment and suicidal behaviour among unemployed youth in sub-Saharan Africa: a systematic review protocol", "year": 2026,
+       "abstract": "Protocol for a systematic review of suicide and suicidal behaviour among unemployed youth aged 15-35.", "label": true},
+      {"title": "Job loss after age 55 and cognitive decline in the Health and Retirement Study", "year": 2022,
+       "abstract": "We study workers aged 55-70 who lost jobs and their subsequent cognitive decline.", "label": false,
+       "why": "older adults only: excluded by the focus"},
+      {"title": "Chronic social defeat stress and anhedonia in mice", "year": 2024,
+       "abstract": "An animal model linking social stress to anhedonia-like behaviour in mice.", "label": false,
+       "why": "animal study: excluded by the focus"},
+      {"title": "The Rise in the Disability Rolls and the Decline in Unemployment", "year": 2003,
+       "abstract": "Economics study of Social Security Disability Insurance growth and measured unemployment in the US.", "label": false,
+       "why": "not about young people or mental health"},
+      {"title": "Large language models for toxic comment detection", "year": 2024,
+       "abstract": "We fine-tune transformer models to detect toxic online comments.", "label": false, "why": "unrelated field"},
+      {"title": "Mental health of unemployed young people during the COVID-19 pandemic: a cross-sectional survey", "year": 2021,
+       "abstract": "A survey of 2,300 unemployed people aged 16-29 measuring anxiety and depression during lockdowns.", "label": true}
+    ]
+  }
+}

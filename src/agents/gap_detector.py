@@ -1,59 +1,29 @@
 import logging
 
-from src.llm.llm import llm
+from src.agents.common import complete, domain_text, error_text, input_budget_chars, truncate
+from src.agents.comparison import focus_line
+from src.agents.prompts import GAP_PROMPT
 from src.graph.state import ResearchState
+from src.research.prompts import data
+from src.reports import report_jobs
 
 logger = logging.getLogger(__name__)
 
-ERROR_PREFIXES = (
-    "No analysis available to compare.",
-    "comparison failed:",
-)
-
 
 def gap_agent(state: ResearchState) -> dict:
-    comparison = state.get("comparison", "")
-    if not comparison or comparison.startswith(ERROR_PREFIXES):
-        return {"gaps": "No comparison data available to analyze gaps."}
-
+    analysis = state.get("analysis", "")
+    if not analysis:
+        return {"gaps": ""}
+    report_jobs.update(state.get("job_id"), stage="identifying gaps")
     logger.info("Detecting research gaps...")
-
-    prompt = f"""You are identifying research gaps and opportunities for future work.
-
-Based on the comparison below, produce a thorough gap analysis.
-
-{comparison}
-
-Organize into these sections:
-
-## Per-Paper Gaps
-Specific limitations or unanswered questions from each individual paper.
-
-## Cross-Cutting Gaps
-Problems, questions, or limitations that none of the papers fully address.
-
-## Missing Investigations
-Critical studies, analyses, or examinations that should have been done but were not:
-- Alternative approaches or perspectives not explored
-- Additional data, sources, cases, or populations needed
-- Follow-up work that would validate or extend the findings
-- Long-term or longitudinal work absent
-
-## Open Research Questions
-- Theoretical, empirical, or methodological questions left unanswered
-- Debates or disagreements that need resolution
-
-## Concrete Next Steps
-For each significant gap, propose a specific next investigation:
-- What would be studied or done
-- What resources would be needed
-- What success would look like
-- Estimated effort (modest / substantial / multi-year)
-
-## Most Impactful Next Step
-The single most valuable investigation to pursue next."""
+    focus = focus_line(state)
+    budget = input_budget_chars(GAP_PROMPT) - len(focus)
+    comparison = state.get("comparison") or "(single paper — no comparison)"
+    comparison = truncate(comparison, int(budget * 0.35))
+    prompt = GAP_PROMPT.format(focus=focus, domain=domain_text(state), comparison=data(comparison),
+                               analysis=data(truncate(analysis, budget - len(comparison))))
     try:
-        result = llm.invoke(prompt)
-        return {"gaps": result.content}
+        return {"gaps": complete(prompt)}
     except Exception as e:
-        return {"gaps": f"Gap Detector failed: {e}"}
+        logger.exception("Gap detection failed")
+        return {"gaps": "", "errors": [error_text("Gap detection", e)]}

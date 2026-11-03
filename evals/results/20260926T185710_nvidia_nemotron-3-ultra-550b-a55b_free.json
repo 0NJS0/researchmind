@@ -1,0 +1,209 @@
+{
+  "topic": "LLM_Toxicity_Detection",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "fast_model": "nvidia/nemotron-3-super-120b-a12b:free",
+  "started_at": "2026-09-26T18:57:10+00:00",
+  "only": [
+    "ask",
+    "gaps",
+    "relevance",
+    "summary"
+  ],
+  "summaries": [
+    {
+      "paper": "Efficient_Detection_of_Toxic_Prompts_in_Large_Language_Models",
+      "chars": 86285,
+      "statements": 29,
+      "empty": false,
+      "fact_recall": 0.8,
+      "missing_facts": [
+        "td_acc_spc"
+      ],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 110.2
+    },
+    {
+      "paper": "Efficient_Toxic_Content_Detection_by_Bootstrapping_and_Distilling_Large_Language_Models",
+      "chars": 55178,
+      "statements": 33,
+      "empty": false,
+      "fact_recall": 0.75,
+      "missing_facts": [
+        "bd_46"
+      ],
+      "unsupported_number_statements": 1,
+      "unsupported_examples": {
+        "Experiments use Toxigen (8,960 train, 940 test), SBIC (4,000 train, 1,000 test), DHate (4,000 train, 1,000 test), and Amazon private dataset (10,000 test only).": [
+          "10000"
+        ]
+      },
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 49.0
+    },
+    {
+      "paper": "Holistic_Evaluation_of_Large_Language_Models_Robustness_Accuracy_and_Toxicity",
+      "chars": 40247,
+      "statements": 9,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 1,
+      "unsupported_examples": {
+        "Evaluation uses 16 datasets including RealToxicityPrompts (1200 toxic prompts), MMLU clinical subsets, BoolQ, TruthfulQA, MedMCQA, MedQA, Bigbench, and others.": [
+          "16"
+        ]
+      },
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 49.6
+    },
+    {
+      "paper": "How_Quantization_Shapes_Bias_in_Large_Language_Models",
+      "chars": 172099,
+      "statements": 20,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 3,
+      "seconds": 185.0
+    },
+    {
+      "paper": "Toxic_Text_Classification_in_Portuguese_Is_LLaMA_3.1_8B_All_You_Need",
+      "chars": 28763,
+      "statements": 27,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 44.9
+    },
+    {
+      "paper": "When_LLMs_Meet_Acoustic_Landmarks_Speech_for_Depression_Detection",
+      "chars": 58777,
+      "statements": 14,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 1,
+      "unsupported_examples": {
+        "Three-stage pipeline: landmark extraction via Python algorithm (6 frequency bands, two-pass), hint cross-modal instruction fine-tuning with LoRA, P-tuning classification with ensemble of three models (M=900,1000,1100).": [
+          "900100"
+        ]
+      },
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 134.2
+    }
+  ],
+  "answers": [
+    {
+      "question": "What accuracy and false positive rate does ToxicDetector achieve on RealToxicityPrompts?",
+      "facts_found": 2,
+      "facts_expected": 2,
+      "correct": true,
+      "cites_expected_paper": true,
+      "citations": 8,
+      "citations_verified": 8,
+      "citation_validity": 1.0,
+      "unverified": [],
+      "errors": [],
+      "ok": true,
+      "requests": 4,
+      "seconds": 127.3
+    },
+    {
+      "question": "How much do student models fine-tuned with DToT rationales improve accuracy, and how much smaller are they than LLMs?",
+      "facts_found": 2,
+      "facts_expected": 2,
+      "correct": true,
+      "cites_expected_paper": true,
+      "citations": 1,
+      "citations_verified": 1,
+      "citation_validity": 1.0,
+      "unverified": [],
+      "errors": [],
+      "ok": true,
+      "requests": 4,
+      "seconds": 102.4
+    },
+    {
+      "question": "What F1-score does the fine-tuned LLaMA 3.1 8B model reach on Portuguese toxic text, and what was it before fine-tuning?",
+      "facts_found": 2,
+      "facts_expected": 2,
+      "correct": true,
+      "cites_expected_paper": true,
+      "citations": 0,
+      "citations_verified": 0,
+      "citation_validity": null,
+      "unverified": [],
+      "errors": [],
+      "ok": true,
+      "requests": 4,
+      "seconds": 80.9
+    },
+    {
+      "question": "Which quantization methods were studied for their effect on bias in large language models?",
+      "facts_found": 3,
+      "facts_expected": 3,
+      "correct": true,
+      "cites_expected_paper": true,
+      "citations": 1,
+      "citations_verified": 1,
+      "citation_validity": 1.0,
+      "unverified": [],
+      "errors": [],
+      "ok": true,
+      "requests": 4,
+      "seconds": 95.8
+    }
+  ],
+  "relevance": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "tn": 7,
+    "fn": 0,
+    "mistakes": [],
+    "requests": 3,
+    "seconds": 26.8
+  },
+  "live_gaps": {
+    "gaps": 17,
+    "generic": 0,
+    "multi_paper": 10,
+    "checked": 2,
+    "confidence": {
+      "high": 3,
+      "medium": 5,
+      "low": 9
+    }
+  },
+  "requests": 27,
+  "headline": {
+    "summary_fact_recall": 0.925,
+    "summary_empty_or_failed": 0,
+    "summary_unsupported_number_statements": 3,
+    "answers_correct": "4/4",
+    "answer_citation_validity": 1.0,
+    "relevance_accuracy": 1.0,
+    "requests": 27
+  }
+}

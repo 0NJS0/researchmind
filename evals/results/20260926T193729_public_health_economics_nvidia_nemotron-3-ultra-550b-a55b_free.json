@@ -1,0 +1,107 @@
+{
+  "topic": "Unemployment and health",
+  "gold": "public_health_economics.json",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "fast_model": "nvidia/nemotron-3-super-120b-a12b:free",
+  "started_at": "2026-09-26T19:37:29+00:00",
+  "only": [
+    "ask",
+    "gaps",
+    "relevance",
+    "summary"
+  ],
+  "summaries": [
+    {
+      "paper": "unemployment_metabolic_syndrome_40y_cohort",
+      "chars": 32573,
+      "statements": 25,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 1,
+      "ok": true,
+      "requests": 1,
+      "seconds": 109.4
+    },
+    {
+      "paper": "suicide_unemployed_youth_cross_sectional",
+      "chars": 41742,
+      "statements": 32,
+      "empty": false,
+      "fact_recall": 1.0,
+      "missing_facts": [],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 23.4
+    },
+    {
+      "paper": "neet_young_adults_scoping_review",
+      "chars": 71644,
+      "statements": 31,
+      "empty": false,
+      "fact_recall": 0.8,
+      "missing_facts": [
+        "ne_11"
+      ],
+      "unsupported_number_statements": 2,
+      "unsupported_examples": {
+        "67% quantitative (survey/register/international databases), 24% qualitative, 9% mixed methods; categorized into 11 thematic topics.": [
+          "9"
+        ],
+        "Geographic distribution: Europe 57% (91 studies), Africa 12% (19), Asia-Pacific 13% (21), Australia 6% (9), Northern America 7% (11), South America 4% (6).": [
+          "4",
+          "6",
+          "7"
+        ]
+      },
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 41.0
+    },
+    {
+      "paper": "disability_rolls_decline_in_unemployment",
+      "chars": 93711,
+      "statements": 18,
+      "empty": false,
+      "fact_recall": 0.8,
+      "missing_facts": [
+        "di_53"
+      ],
+      "unsupported_number_statements": 0,
+      "unsupported_examples": {},
+      "inferred_with_numbers": 0,
+      "ok": true,
+      "requests": 1,
+      "seconds": 44.2
+    }
+  ],
+  "relevance": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "tp": 4,
+    "fp": 0,
+    "tn": 4,
+    "fn": 0,
+    "mistakes": [],
+    "requests": 2,
+    "seconds": 39.0
+  },
+  "requests": 7,
+  "headline": {
+    "summary_fact_recall": 0.9,
+    "summary_empty_or_failed": 0,
+    "summary_unsupported_number_statements": 2,
+    "answers_correct": null,
+    "answer_citation_validity": null,
+    "answers_uncited": 0,
+    "relevance_accuracy": 1.0,
+    "requests": 7
+  }
+}

@@ -1,47 +1,33 @@
 import logging
 
-from src.llm.llm import llm
+from src.agents.common import complete, domain_text, error_text, input_budget_chars, truncate
+from src.agents.prompts import COMPARISON_PROMPT
 from src.graph.state import ResearchState
+from src.research.prompts import data
+from src.reports import report_jobs
 
 logger = logging.getLogger(__name__)
 
-ERROR_PREFIXES = ("No documents found to analyze.", "Analysis failed:")
+
+def focus_line(state) -> str:
+    if state.get("mode") == "report":
+        return f'Research topic: "{state.get("topic", "")}"\n'
+    return f"<question>{state.get('question', '')}</question>\nFocus the comparison on what matters for this question.\n"
 
 
 def comparison_agent(state: ResearchState) -> dict:
     analysis = state.get("analysis", "")
-    domain = state.get("domain_classification", "")
-    if not analysis or analysis.startswith(ERROR_PREFIXES):
-        return {"comparison": "No analysis available to compare."}
-
+    if not analysis:
+        return {"comparison": ""}
+    if state.get("paper_count", 0) < 2:
+        return {"comparison": ""}  # nothing to compare with a single paper
+    report_jobs.update(state.get("job_id"), stage="comparing papers", current="")
     logger.info("Comparing analyses...")
-
-    domain_hint = f"\nDomain of these papers: {domain}\n" if domain else "\n"
-
-    prompt = f"""You are producing a structured comparison of research papers.{domain_hint}
-
-Based on the detailed per-paper analyses below, produce a comprehensive comparison.
-
-{analysis}
-
-## Comparison Table (markdown)
-Build a table comparing ALL papers across meaningful dimensions for this field. Choose columns that capture what matters for this type of research. Include at minimum:
-- Paper identification
-- Data / sources used
-- Methodology / approach
-- Key results
-- Limitations
-Add any additional columns important for this specific domain.
-
-## Cross-Paper Synthesis
-- Common patterns and themes across papers
-- Contradictions or disagreements and what might explain them
-- Methodological quality differences
-
-## Unique Contributions
-What each paper contributes that others in this set do not"""
+    focus = focus_line(state)
+    budget = input_budget_chars(COMPARISON_PROMPT) - len(focus)
+    prompt = COMPARISON_PROMPT.format(focus=focus, domain=domain_text(state), analysis=data(truncate(analysis, budget)))
     try:
-        result = llm.invoke(prompt)
-        return {"comparison": result.content}
+        return {"comparison": complete(prompt)}
     except Exception as e:
-        return {"comparison": f"comparison failed: {e}"}
+        logger.exception("Comparison failed")
+        return {"comparison": "", "errors": [error_text("Comparison", e)]}
